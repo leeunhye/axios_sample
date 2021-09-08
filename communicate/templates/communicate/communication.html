@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message</title>
+
+    <!-- for javaScript -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+    <!-- 本番バージョン、サイズと速度のために最適化されています -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <!-- 本番用 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- 自作css -->
+    <link rel="stylesheet" href= "{% static 'css/common.css' %}">
+
+</head>
+<body>
+    <div id="app" v-cloak>
+        <div class="container inputBox">
+            <div class="row">
+                <div class="col-2">
+                    <label for="company" class="form-label">部署名</label>
+                    <select id="company" name="company" class="form-control" v-model.trim="company">
+                        <option value="" selected disabled>==部署名==</option>
+                        <option value="A">営業部</option>
+                        <option value="B">広報部</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <label for="name" class="form-label">申請者</label>
+                    <input type="text" id="name" name="name" placeholder="申請者" class="form-control" required v-model.trim="name">
+                </div>
+                <div class="col-3">
+                    <label for="apply_date" class="form-label">申請日</label>
+                    <input id="apply_date" name="apply_date" type="date" data-placeholder="申請日" class="form-control input-placeholder" v-model.trim="apply_date">
+                </div>
+                <div class="col-5">
+                    <button v-on:click="approval_create" class="btn search-btn float-right">申請</button>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <label for="title" class="form-label">タイトル</label>
+                    <input type="text" id="title" name="title" placeholder="申請タイトル" class="form-control" required v-model.trim="title">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <label for="content" class="form-label">申請内容</label>
+                    <textarea id="content" name="content" class="form-control" rows="5" required v-model.trim="content">申請内容</textarea>
+                </div>
+            </div>
+
+        </div>
+
+      <table class="table container" style="text-align:center;">
+        <thead class="text14size">
+          <tr>
+            <th style="width:10%">所属部署</th>
+            <th style="width:10%">申請者</th>
+            <th style="width:15%">申請日</th>
+            <th style="width:20%">申請タイトル</th>
+            <th style="width:45%">申請内容</th>
+          </tr>
+        </thead>
+        <tbody class="text14size">
+          <tr v-for="record in records">
+            <td>${ record.company }</td>
+            <td>${ record.name }</td>
+            <td>${ record.apply_date }</td>
+            <td>${ record.title }</td>
+            <td>${ record.content }</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="{% static 'js/communicate.js' %}"></script>
+</body>
+</html>

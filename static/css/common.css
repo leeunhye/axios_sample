@@ -1,0 +1,19 @@
+body {
+    background: #f7eef2;
+}
+
+.container {
+    padding: 40px;
+
+}
+
+.float-right {
+    float: right;
+}
+
+.search-btn {
+    background: #241e6b;
+    width: 80px;
+    color: #ffffff;
+    font-weight: bold;
+}
