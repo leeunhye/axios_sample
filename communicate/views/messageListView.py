@@ -8,7 +8,7 @@ class MessageListView(generics.ListAPIView):
     情報リストを取得して画面に送信する。
     """
     def get(self, request, *args, **kwargs):
-
+        # pip install djangorestframeworkでrestframeworkをインストールしてから確認
         data = self.get_queryset()
 
         return Response(data)
