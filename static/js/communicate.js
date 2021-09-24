@@ -11,7 +11,8 @@ var vm = new Vue({
     name: '',
     apply_date: '',
     title: '',
-    content: ''
+    content: '',
+    error_list:'',
   },
   created: function() {
     this.find();
@@ -43,11 +44,12 @@ var vm = new Vue({
         .then((response) => {
           // 入力値初期化
           alert('サーバーに渡しました。');
-          this.company = this.apply_date = this.name = this.title = this.content = '';
+          this.company = this.apply_date = this.name = this.title = this.content = this.error_list = '';
+          this.find();
         })
-        .catch(function () {
-          alert('サーバーに渡せませんでした。');
-          console.log('post err', err)
+        .catch((err) => {
+          console.log('post err', err.response.data)
+          this.error_list = err.response.data;
         })
     },
 

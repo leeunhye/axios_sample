@@ -47,6 +47,12 @@
                 </div>
 
             </div>
+
+            <div>
+                <li v-for="error,field in error_list">
+                    <ul>${ field } : ${ error[0] }</ul>
+                </li>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <label for="title" class="form-label">タイトル</label>

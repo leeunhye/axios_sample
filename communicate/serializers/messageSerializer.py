@@ -6,7 +6,7 @@ class MessageSerializer(Serializer):
     id = IntegerField(read_only=True)
     company = CharField(read_only=True)
     name = CharField(read_only=True)
-    apply_date = DateTimeField(read_only=True)
+    apply_date = DateTimeField(format="%Y-%m-%d %H:%M:%S", read_only=True)
     title = CharField(read_only=True)
     content = CharField(read_only=True)
 
