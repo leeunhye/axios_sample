@@ -1,6 +1,5 @@
 import json
 
-from django.forms import model_to_dict
 from django.http import JsonResponse
 
 from django.views.generic.edit import BaseCreateView
@@ -36,7 +35,5 @@ class MessageCreateView(BaseCreateView):
 
     def form_invalid(self, form):
         print("form_invalid", form.errors)
-        print(type(form.errors))
-        print(form)
         return JsonResponse(data=form.errors, status=400)
 

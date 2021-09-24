@@ -2,6 +2,7 @@ from django import forms
 
 from communicate.models import Approval
 
+# エラーメッセージを定数として管理することで複数回使われる場合もしくは変更があった場合、対応がしやすいです。
 ERROR_NAME_MAX_LENGTH = "申請者の名前は10字以内で入力してください。"
 ERROR_DUPLICATED_TITLE = "同一タイトルが既に存在します。"
 
@@ -9,6 +10,9 @@ ERROR_DUPLICATED_TITLE = "同一タイトルが既に存在します。"
 class ApprovalForm(forms.Form):
     """
     申請内容フォーム
+    入力チェックする項目を書きます。
+    必須項目であること（required=True）、最大長さ指定（max_length=長さ）、最低長さ指定（min_length=長さ）など
+    エラーメッセージを指定しなかったらdjangoの内装エラーメッセージが出力されるが、error_messageで指定もできます。
     """
     # 申請者
     name = forms.CharField(
@@ -34,6 +38,8 @@ class ApprovalForm(forms.Form):
         label='申請内容'
     )
 
+    # clean_項目名で既存のValidationをつけれます。
+    # def clean(self): で全体的な項目をもとにチェック処理ができます。
     def clean_title(self):
         title = self.cleaned_data['title']
         # 登録しようとするタイトルが既にデータベースに存在するか確認する。
